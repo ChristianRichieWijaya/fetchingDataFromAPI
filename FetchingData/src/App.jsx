@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios';
 
+
 function App() {
   const [data, setData] = useState([]);
 
@@ -51,13 +52,13 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {item.data.pagi.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.id}</td>
-                    <td>{item.nama}</td>
-                    <td>{item.jenis_kelamin}</td>
-                    <td>{item.alamat}</td>
-                    <td>{item.hobi.join(", ")}</td>
+                {item.data.pagi.map((itemPagi, indexPagi) => (
+                  <tr key={indexPagi}>
+                    <td>{getNPM(item.tahun_masuk,data.kode_prodi,indexPagi + 1)}</td>
+                    <td>{itemPagi.nama}</td>
+                    <td>{itemPagi.jenis_kelamin}</td>
+                    <td>{itemPagi.alamat}</td>
+                    <td>{itemPagi.hobi.join(", ")}</td>
                   </tr>
                 ))}
               </tbody>
@@ -76,13 +77,13 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {item.data.malam.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.id}</td>
-                    <td>{item.nama}</td>
-                    <td>{item.jenis_kelamin}</td>
-                    <td>{item.alamat}</td>
-                    <td>{item.hobi.join(", ")}</td>
+                {item.data.malam.map((itemMalam, indexMalam) => (
+                  <tr key={indexMalam}>
+                    <td>{getNPM(item.tahun_masuk,data.kode_prodi,indexMalam + 1)}</td>
+                    <td>{itemMalam.nama}</td>
+                    <td>{itemMalam.jenis_kelamin}</td>
+                    <td>{itemMalam.alamat}</td>
+                    <td>{itemMalam.hobi.join(", ")}</td>
                   </tr>
                 ))}
               </tbody>
@@ -124,33 +125,11 @@ function App() {
   );
 }
 
-// function getNPM(tahunMasuk, kodeProdi){
-//   // const tahunMasuk21 = tahunMasuk[0].substring(2,4)
-//   // const tahunMasuk22 = tahunMasuk[1].substring(2,4)
-//   // const prodiIF = kodeProdi[0]
-//   // const prodiSI = kodeProdi[1]
-  
-//   const prodi1 = "212525"
-//   const prodi2 = "222625"
-//   const prodi3 = "212524"
-//   const prodi4 = "222624"
-//   console.log(tahunMasukIF);
-//   return (
-//     <>
-//     {if(tahunMasuk = "2021" && kodeProdi = "24") {
-//       {prodi3}
-//     }else if (tahunMasuk = "2021" && kodeProdi = "25") {
-//       {prodi1}
-//     }else if (tahunMasuk = "2022" && kodeProdi = "24"){
-//       {prodi4}
-//     }else if(tahunMasuk = "2022" && kodeProdi = "25"){
-//       {prodi2}
-//     }}
-
-    
-//     </>
-//   )
-// }
+function getNPM(tahunMasuk, kodeProdi, kodeUnik){
+  const tahunLulus = parseInt(tahunMasuk) + 4;
+  const kodeUnique = String(kodeUnik).padStart(4, "0");
+  return `${tahunMasuk.slice(-2)}${tahunLulus.toString().slice(-2)}${kodeProdi}${kodeUnique}`;
+}
 
 
 export default App;
